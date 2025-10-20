@@ -1,14 +1,12 @@
 from . import db
-from typing import TYPE_CHECKING
+from sqlalchemy.orm import DeclarativeBase
 
-if TYPE_CHECKING:
-    from flask_sqlalchemy.model import Model
-else:
-    Model = db.Model
+class Base(DeclarativeBase):
+    pass
 
-class User(Model):
+class User(Base):
     __tablename__ = 'users'
     
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, nullable=False)
-    pw_hash = db.Column(db.String, nullable=False)
+    id: int = db.Column(db.Integer, primary_key=True)
+    username: str = db.Column(db.String, nullable=False)
+    pw_hash: str = db.Column(db.String, nullable=False)
